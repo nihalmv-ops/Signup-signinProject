@@ -539,3 +539,55 @@ if (signinForm) {
     }
 
 }
+
+
+// ==========================================
+// TRAVEL APP AUTHENTICATION
+// ==========================================
+
+const welcomeUser =
+    document.getElementById("welcomeUser");
+
+const logoutBtn =
+    document.getElementById("logoutBtn");
+
+
+if (welcomeUser) {
+
+    const storedUser =
+        localStorage.getItem("registeredUser");
+
+
+    if (storedUser) {
+
+        const user =
+            JSON.parse(storedUser);
+
+
+        welcomeUser.textContent =
+            `Welcome, ${user.fullName}`;
+
+    }
+
+}
+
+
+// ==========================================
+// LOGOUT
+// ==========================================
+
+if (logoutBtn) {
+
+    logoutBtn.addEventListener(
+        "click",
+        function () {
+
+            localStorage.removeItem("isLoggedIn");
+
+            window.location.href =
+                "SignIn.html";
+
+        }
+    );
+
+}
