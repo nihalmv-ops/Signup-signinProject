@@ -12,13 +12,25 @@ const password = document.getElementById("password");
 const confirmPassword = document.getElementById("confirmPassword");
 
 
-// Error elements
+// ==========================================
+// SIGNUP ERROR ELEMENTS
+// ==========================================
 
-const fullNameError = document.getElementById("fullNameError");
-const emailError = document.getElementById("emailError");
-const phoneError = document.getElementById("phoneError");
-const locationError = document.getElementById("locationError");
-const passwordError = document.getElementById("passwordError");
+const fullNameError =
+    document.getElementById("fullNameError");
+
+const emailError =
+    document.getElementById("emailError");
+
+const phoneError =
+    document.getElementById("phoneError");
+
+const locationError =
+    document.getElementById("locationError");
+
+const passwordError =
+    document.getElementById("passwordError");
+
 const confirmPasswordError =
     document.getElementById("confirmPasswordError");
 
@@ -28,7 +40,6 @@ const confirmPasswordError =
 // ==========================================
 
 // Email validation
-
 function isValidEmail(value) {
 
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
@@ -37,7 +48,6 @@ function isValidEmail(value) {
 
 
 // Phone validation
-
 function isValidPhone(value) {
 
     return /^\d{10}$/.test(value);
@@ -46,7 +56,6 @@ function isValidPhone(value) {
 
 
 // Location validation
-
 function isValidLocation(value) {
 
     return /^[A-Za-z\s]+$/.test(value);
@@ -56,7 +65,7 @@ function isValidLocation(value) {
 
 // Password validation
 // Minimum 8 characters
-// Must contain letters and numbers
+// Must contain at least one letter and one number
 
 function isValidPassword(value) {
 
@@ -74,7 +83,6 @@ if (signupForm) {
     signupForm.addEventListener("submit", function (event) {
 
         event.preventDefault();
-
 
         let valid = true;
 
@@ -230,20 +238,25 @@ if (signupForm) {
 
             const user = {
 
-                fullName: fullName.value.trim(),
+                fullName:
+                    fullName.value.trim(),
 
-                email: email.value.trim().toLowerCase(),
+                email:
+                    email.value.trim().toLowerCase(),
 
-                phone: phone.value.trim(),
+                phone:
+                    phone.value.trim(),
 
-                location: locationInput.value.trim(),
+                location:
+                    locationInput.value.trim(),
 
-                password: password.value
+                password:
+                    password.value
 
             };
 
 
-            // Save user in browser
+            // Save registered user
 
             localStorage.setItem(
                 "registeredUser",
@@ -251,14 +264,21 @@ if (signupForm) {
             );
 
 
+            // Make sure user is logged out
+            // until they sign in
+
+            localStorage.removeItem("isLoggedIn");
+
+
             alert(
                 "Signup successful! Please sign in."
             );
 
 
-            // Go to SignIn page
+            // Redirect to Sign In
 
-            window.location.href = "SignIn.html";
+            window.location.href =
+                "SignIn.html";
 
         }
 
@@ -285,7 +305,8 @@ if (togglePassword && password) {
 
                 password.type = "text";
 
-                togglePassword.textContent = "Hide";
+                togglePassword.textContent =
+                    "Hide";
 
             }
 
@@ -293,7 +314,8 @@ if (togglePassword && password) {
 
                 password.type = "password";
 
-                togglePassword.textContent = "Show";
+                togglePassword.textContent =
+                    "Show";
 
             }
 
@@ -319,7 +341,10 @@ if (toggleConfirmPassword && confirmPassword) {
         "click",
         function () {
 
-            if (confirmPassword.type === "password") {
+            if (
+                confirmPassword.type ===
+                "password"
+            ) {
 
                 confirmPassword.type = "text";
 
@@ -383,7 +408,9 @@ if (signinForm) {
 
 
             const enteredEmail =
-                signinEmail.value.trim().toLowerCase();
+                signinEmail.value
+                    .trim()
+                    .toLowerCase();
 
             const enteredPassword =
                 signinPassword.value;
@@ -441,7 +468,9 @@ if (signinForm) {
             // ==================================
 
             const storedUser =
-                localStorage.getItem("registeredUser");
+                localStorage.getItem(
+                    "registeredUser"
+                );
 
 
             if (!storedUser) {
@@ -454,8 +483,27 @@ if (signinForm) {
             }
 
 
-            const user =
-                JSON.parse(storedUser);
+            let user;
+
+
+            try {
+
+                user = JSON.parse(storedUser);
+
+            }
+
+            catch (error) {
+
+                signinEmailError.textContent =
+                    "Invalid registered user data.";
+
+                localStorage.removeItem(
+                    "registeredUser"
+                );
+
+                return;
+
+            }
 
 
             // ==================================
@@ -478,7 +526,7 @@ if (signinForm) {
                 alert("Login successful!");
 
 
-                // Redirect to Tourist Landing Page
+                // Go to Tourist Landing Page
 
                 window.location.href =
                     "travelapp.html";
@@ -506,7 +554,10 @@ if (signinForm) {
         );
 
 
-    if (toggleSigninPassword) {
+    if (
+        toggleSigninPassword &&
+        signinPassword
+    ) {
 
         toggleSigninPassword.addEventListener(
             "click",
@@ -526,7 +577,8 @@ if (signinForm) {
 
                 else {
 
-                    signinPassword.type = "password";
+                    signinPassword.type =
+                        "password";
 
                     toggleSigninPassword.textContent =
                         "Show";
@@ -552,20 +604,43 @@ const logoutBtn =
     document.getElementById("logoutBtn");
 
 
+// ==========================================
+// SHOW USER NAME
+// ==========================================
+
 if (welcomeUser) {
+
+    const isLoggedIn =
+        localStorage.getItem("isLoggedIn");
 
     const storedUser =
         localStorage.getItem("registeredUser");
 
 
-    if (storedUser) {
+    if (
+        isLoggedIn === "true" &&
+        storedUser
+    ) {
 
-        const user =
-            JSON.parse(storedUser);
+        try {
+
+            const user =
+                JSON.parse(storedUser);
 
 
-        welcomeUser.textContent =
-            `Welcome, ${user.fullName}`;
+            welcomeUser.textContent =
+                `Welcome, ${user.fullName}`;
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "User data error:",
+                error
+            );
+
+        }
 
     }
 
@@ -580,9 +655,19 @@ if (logoutBtn) {
 
     logoutBtn.addEventListener(
         "click",
-        function () {
+        function (event) {
 
-            localStorage.removeItem("isLoggedIn");
+            event.preventDefault();
+
+
+            // Remove login status
+
+            localStorage.removeItem(
+                "isLoggedIn"
+            );
+
+
+            // Redirect to Sign In
 
             window.location.href =
                 "SignIn.html";

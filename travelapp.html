@@ -12,28 +12,15 @@
 
     <span id="welcomeUser"></span>
 
-    <button
-        id="logoutBtn"
-        class="logout-btn">
-        Logout
-    </button>
+   <button type="button" id="logoutBtn" class="logout-btn">
+    Logout
+</button>
 
 </div>
 
 <body>
 
-<script>
-
-    const isLoggedIn =
-        localStorage.getItem("isLoggedIn");
-
-    if (isLoggedIn !== "true") {
-
-        window.location.href = "SignIn.html";
-
-    }
-
-</script>
+<script src="js/index.js"></script>
 </body>
 
 </html>
