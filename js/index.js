@@ -1,42 +1,31 @@
+// ==========================================
+// SIGNUP ELEMENTS
+// ==========================================
+
 const signupForm = document.getElementById("signupForm");
 
-
-// Get input fields
-
 const fullName = document.getElementById("fullName");
-
 const email = document.getElementById("email");
-
 const phone = document.getElementById("phone");
-
 const locationInput = document.getElementById("location");
-
 const password = document.getElementById("password");
-
-const confirmPassword =
-    document.getElementById("confirmPassword");
+const confirmPassword = document.getElementById("confirmPassword");
 
 
 // Error elements
 
-const fullNameError =
-    document.getElementById("fullNameError");
-
-const emailError =
-    document.getElementById("emailError");
-
-const phoneError =
-    document.getElementById("phoneError");
-
-const locationError =
-    document.getElementById("locationError");
-
-const passwordError =
-    document.getElementById("passwordError");
-
+const fullNameError = document.getElementById("fullNameError");
+const emailError = document.getElementById("emailError");
+const phoneError = document.getElementById("phoneError");
+const locationError = document.getElementById("locationError");
+const passwordError = document.getElementById("passwordError");
 const confirmPasswordError =
     document.getElementById("confirmPasswordError");
 
+
+// ==========================================
+// VALIDATION FUNCTIONS
+// ==========================================
 
 // Email validation
 
@@ -66,6 +55,8 @@ function isValidLocation(value) {
 
 
 // Password validation
+// Minimum 8 characters
+// Must contain letters and numbers
 
 function isValidPassword(value) {
 
@@ -74,193 +65,247 @@ function isValidPassword(value) {
 }
 
 
-// Signup submit
+// ==========================================
+// SIGNUP FORM
+// ==========================================
 
-signupForm.addEventListener("submit", function (event) {
+if (signupForm) {
 
-    event.preventDefault();
+    signupForm.addEventListener("submit", function (event) {
 
+        event.preventDefault();
 
-    let valid = true;
 
+        let valid = true;
 
-    // Clear errors
 
-    fullNameError.textContent = "";
+        // Clear previous errors
 
-    emailError.textContent = "";
+        fullNameError.textContent = "";
+        emailError.textContent = "";
+        phoneError.textContent = "";
+        locationError.textContent = "";
+        passwordError.textContent = "";
+        confirmPasswordError.textContent = "";
 
-    phoneError.textContent = "";
 
-    locationError.textContent = "";
+        // ==================================
+        // FULL NAME
+        // ==================================
 
-    passwordError.textContent = "";
+        if (fullName.value.trim() === "") {
 
-    confirmPasswordError.textContent = "";
+            fullNameError.textContent =
+                "Full Name is required.";
 
+            valid = false;
 
-    // Full Name
+        }
 
-    if (fullName.value.trim() === "") {
 
-        fullNameError.textContent =
-            "Full Name is required.";
+        // ==================================
+        // EMAIL
+        // ==================================
 
-        valid = false;
+        if (email.value.trim() === "") {
 
-    }
+            emailError.textContent =
+                "Email is required.";
 
+            valid = false;
 
-    // Email
+        }
 
-    if (email.value.trim() === "") {
+        else if (!isValidEmail(email.value.trim())) {
 
-        emailError.textContent =
-            "Email is required.";
+            emailError.textContent =
+                "Enter a valid email address.";
 
-        valid = false;
+            valid = false;
 
-    }
+        }
 
-    else if (!isValidEmail(email.value.trim())) {
 
-        emailError.textContent =
-            "Enter a valid email address.";
+        // ==================================
+        // PHONE
+        // ==================================
 
-        valid = false;
+        if (phone.value.trim() === "") {
 
-    }
+            phoneError.textContent =
+                "Phone number is required.";
 
+            valid = false;
 
-    // Phone
+        }
 
-    if (phone.value.trim() === "") {
+        else if (!isValidPhone(phone.value.trim())) {
 
-        phoneError.textContent =
-            "Phone number is required.";
+            phoneError.textContent =
+                "Phone number must contain 10 digits.";
 
-        valid = false;
+            valid = false;
 
-    }
+        }
 
-    else if (!isValidPhone(phone.value.trim())) {
 
-        phoneError.textContent =
-            "Phone number must contain 10 digits.";
+        // ==================================
+        // LOCATION
+        // ==================================
 
-        valid = false;
+        if (locationInput.value.trim() === "") {
 
-    }
+            locationError.textContent =
+                "Location is required.";
 
+            valid = false;
 
-    // Location
+        }
 
-    if (locationInput.value.trim() === "") {
+        else if (
+            !isValidLocation(locationInput.value.trim())
+        ) {
 
-        locationError.textContent =
-            "Location is required.";
+            locationError.textContent =
+                "Location must contain only alphabets.";
 
-        valid = false;
+            valid = false;
 
-    }
+        }
 
-    else if (
-        !isValidLocation(locationInput.value.trim())
-    ) {
 
-        locationError.textContent =
-            "Location must contain only alphabets.";
+        // ==================================
+        // PASSWORD
+        // ==================================
 
-        valid = false;
+        if (password.value === "") {
 
-    }
+            passwordError.textContent =
+                "Password is required.";
 
+            valid = false;
 
-    // Password
+        }
 
-    if (password.value === "") {
+        else if (!isValidPassword(password.value)) {
 
-        passwordError.textContent =
-            "Password is required.";
+            passwordError.textContent =
+                "Password must be 8+ characters with letters and numbers.";
 
-        valid = false;
+            valid = false;
 
-    }
+        }
 
-    else if (!isValidPassword(password.value)) {
 
-        passwordError.textContent =
-            "Password must be 8+ characters with letters and numbers.";
+        // ==================================
+        // CONFIRM PASSWORD
+        // ==================================
 
-        valid = false;
+        if (confirmPassword.value === "") {
 
-    }
+            confirmPasswordError.textContent =
+                "Please confirm your password.";
 
+            valid = false;
 
-    // Confirm Password
+        }
 
-    if (confirmPassword.value === "") {
+        else if (
+            password.value !== confirmPassword.value
+        ) {
 
-        confirmPasswordError.textContent =
-            "Please confirm your password.";
+            confirmPasswordError.textContent =
+                "Passwords do not match.";
 
-        valid = false;
+            valid = false;
 
-    }
+        }
 
-    else if (
-        password.value !== confirmPassword.value
-    ) {
 
-        confirmPasswordError.textContent =
-            "Passwords do not match.";
+        // ==================================
+        // SAVE USER
+        // ==================================
 
-        valid = false;
+        if (valid) {
 
-    }
+            const user = {
 
+                fullName: fullName.value.trim(),
 
-    // Success
+                email: email.value.trim().toLowerCase(),
 
-    if (valid) {
+                phone: phone.value.trim(),
 
-        alert("Signup validation successful!");
+                location: locationInput.value.trim(),
 
-    }
+                password: password.value
 
-});
+            };
 
 
-// =========================
-// Show / Hide Password
-// =========================
+            // Save user in browser
+
+            localStorage.setItem(
+                "registeredUser",
+                JSON.stringify(user)
+            );
+
+
+            alert(
+                "Signup successful! Please sign in."
+            );
+
+
+            // Go to SignIn page
+
+            window.location.href = "SignIn.html";
+
+        }
+
+    });
+
+}
+
+
+// ==========================================
+// SHOW / HIDE SIGNUP PASSWORD
+// ==========================================
 
 const togglePassword =
     document.getElementById("togglePassword");
 
 
-togglePassword.addEventListener("click", function () {
+if (togglePassword && password) {
 
-    if (password.type === "password") {
+    togglePassword.addEventListener(
+        "click",
+        function () {
 
-        password.type = "text";
+            if (password.type === "password") {
 
-        togglePassword.textContent = "Hide";
+                password.type = "text";
 
-    }
+                togglePassword.textContent = "Hide";
 
-    else {
+            }
 
-        password.type = "password";
+            else {
 
-        togglePassword.textContent = "Show";
+                password.type = "password";
 
-    }
+                togglePassword.textContent = "Show";
 
-});
+            }
+
+        }
+    );
+
+}
 
 
-// Confirm password toggle
+// ==========================================
+// SHOW / HIDE CONFIRM PASSWORD
+// ==========================================
 
 const toggleConfirmPassword =
     document.getElementById(
@@ -268,27 +313,229 @@ const toggleConfirmPassword =
     );
 
 
-toggleConfirmPassword.addEventListener(
-    "click",
-    function () {
+if (toggleConfirmPassword && confirmPassword) {
 
-        if (confirmPassword.type === "password") {
+    toggleConfirmPassword.addEventListener(
+        "click",
+        function () {
 
-            confirmPassword.type = "text";
+            if (confirmPassword.type === "password") {
 
-            toggleConfirmPassword.textContent =
-                "Hide";
+                confirmPassword.type = "text";
+
+                toggleConfirmPassword.textContent =
+                    "Hide";
+
+            }
+
+            else {
+
+                confirmPassword.type = "password";
+
+                toggleConfirmPassword.textContent =
+                    "Show";
+
+            }
 
         }
+    );
 
-        else {
+}
 
-            confirmPassword.type = "password";
 
-            toggleConfirmPassword.textContent =
-                "Show";
+// ==========================================
+// SIGN IN
+// ==========================================
+
+const signinForm =
+    document.getElementById("signinForm");
+
+
+if (signinForm) {
+
+    const signinEmail =
+        document.getElementById("signinEmail");
+
+    const signinPassword =
+        document.getElementById("signinPassword");
+
+    const signinEmailError =
+        document.getElementById("signinEmailError");
+
+    const signinPasswordError =
+        document.getElementById(
+            "signinPasswordError"
+        );
+
+
+    signinForm.addEventListener(
+        "submit",
+        function (event) {
+
+            event.preventDefault();
+
+
+            // Clear errors
+
+            signinEmailError.textContent = "";
+
+            signinPasswordError.textContent = "";
+
+
+            const enteredEmail =
+                signinEmail.value.trim().toLowerCase();
+
+            const enteredPassword =
+                signinPassword.value;
+
+
+            let valid = true;
+
+
+            // ==================================
+            // EMAIL
+            // ==================================
+
+            if (enteredEmail === "") {
+
+                signinEmailError.textContent =
+                    "Email is required.";
+
+                valid = false;
+
+            }
+
+            else if (!isValidEmail(enteredEmail)) {
+
+                signinEmailError.textContent =
+                    "Enter a valid email address.";
+
+                valid = false;
+
+            }
+
+
+            // ==================================
+            // PASSWORD
+            // ==================================
+
+            if (enteredPassword === "") {
+
+                signinPasswordError.textContent =
+                    "Password is required.";
+
+                valid = false;
+
+            }
+
+
+            if (!valid) {
+
+                return;
+
+            }
+
+
+            // ==================================
+            // GET REGISTERED USER
+            // ==================================
+
+            const storedUser =
+                localStorage.getItem("registeredUser");
+
+
+            if (!storedUser) {
+
+                signinEmailError.textContent =
+                    "No registered account found. Please sign up first.";
+
+                return;
+
+            }
+
+
+            const user =
+                JSON.parse(storedUser);
+
+
+            // ==================================
+            // CHECK LOGIN DETAILS
+            // ==================================
+
+            if (
+                enteredEmail === user.email &&
+                enteredPassword === user.password
+            ) {
+
+                // Login successful
+
+                localStorage.setItem(
+                    "isLoggedIn",
+                    "true"
+                );
+
+
+                alert("Login successful!");
+
+
+                // Redirect to Tourist Landing Page
+
+                window.location.href =
+                    "travelapp.html";
+
+            }
+
+            else {
+
+                signinPasswordError.textContent =
+                    "Incorrect email or password.";
+
+            }
 
         }
+    );
+
+
+    // ==================================
+    // SHOW / HIDE SIGNIN PASSWORD
+    // ==================================
+
+    const toggleSigninPassword =
+        document.getElementById(
+            "toggleSigninPassword"
+        );
+
+
+    if (toggleSigninPassword) {
+
+        toggleSigninPassword.addEventListener(
+            "click",
+            function () {
+
+                if (
+                    signinPassword.type ===
+                    "password"
+                ) {
+
+                    signinPassword.type = "text";
+
+                    toggleSigninPassword.textContent =
+                        "Hide";
+
+                }
+
+                else {
+
+                    signinPassword.type = "password";
+
+                    toggleSigninPassword.textContent =
+                        "Show";
+
+                }
+
+            }
+        );
 
     }
-);
+
+}
