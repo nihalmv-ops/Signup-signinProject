@@ -1,26 +1,594 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>Document</title>
-    <link rel="stylesheet" href="/css/style.css">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>TravelGo | Explore The World</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
 </head>
-<body>
-    <div class="user-area">
-
-    <span id="welcomeUser"></span>
-
-   <button type="button" id="logoutBtn" class="logout-btn">
-    Logout
-</button>
-
-</div>
 
 <body>
 
-<script src="js/index.js"></script>
+    <!-- ==========================================
+         AUTHENTICATION CHECK
+    =========================================== -->
+
+    <script>
+
+        if (
+            localStorage.getItem("isLoggedIn") !== "true"
+        ) {
+
+            window.location.href = "SignIn.html";
+
+        }
+
+    </script>
+
+
+    <!-- ==========================================
+         HEADER
+    =========================================== -->
+
+    <header class="travel-header">
+
+        <nav class="navbar">
+
+            <a href="#home" class="logo">
+                Travel<span>Go</span>
+            </a>
+
+
+            <div class="nav-links">
+
+                <a href="#home">Home</a>
+
+                <a href="#destinations">
+                    Destinations
+                </a>
+
+                <a href="#features">
+                    Features
+                </a>
+
+                <a href="#contact">
+                    Contact
+                </a>
+
+            </div>
+
+
+            <div class="user-area">
+
+                <span id="welcomeUser"></span>
+
+                <button
+                    type="button"
+                    id="logoutBtn"
+                    class="logout-btn"
+                >
+                    Logout
+                </button>
+
+            </div>
+
+
+            <button
+                class="menu-btn"
+                id="menuBtn"
+                type="button"
+            >
+                ☰
+            </button>
+
+        </nav>
+
+    </header>
+
+
+    <!-- ==========================================
+         MAIN
+    =========================================== -->
+
+    <main>
+
+
+        <!-- ======================================
+             HERO
+        ======================================= -->
+
+        <section
+            class="hero"
+            id="home"
+        >
+
+            <div class="hero-overlay"></div>
+
+            <div class="hero-content">
+
+                <p class="hero-small">
+                    ✈ Discover • Explore • Enjoy
+                </p>
+
+                <h1>
+                    Explore The World
+                    <br>
+                    <span>Your Way</span>
+                </h1>
+
+                <p class="hero-description">
+
+                    Discover breathtaking destinations,
+                    unforgettable experiences and
+                    beautiful places around the world.
+
+                </p>
+
+
+                <div class="hero-buttons">
+
+                    <a
+                        href="#destinations"
+                        class="primary-btn"
+                    >
+                        Explore Destinations
+                    </a>
+
+                    <a
+                        href="#contact"
+                        class="secondary-btn"
+                    >
+                        Contact Us
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ======================================
+             FEATURES
+        ======================================= -->
+
+        <section
+            class="features-section"
+            id="features"
+        >
+
+            <div class="section-heading">
+
+                <p>WHY CHOOSE US</p>
+
+                <h2>
+                    Travel Made Simple
+                </h2>
+
+                <span>
+                    Everything you need for your
+                    next unforgettable journey.
+                </span>
+
+            </div>
+
+
+            <div class="features-grid">
+
+
+                <article class="feature-card">
+
+                    <div class="feature-image">
+
+                        <img
+                            src="Images/samplepic1.jpg"
+                            alt="Travel destination"
+                        >
+
+                    </div>
+
+                    <div class="feature-content">
+
+                        <h3>
+                            Beautiful Destinations
+                        </h3>
+
+                        <p>
+                            Explore amazing destinations
+                            and discover places that create
+                            unforgettable memories.
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+                <article class="feature-card">
+
+                    <div class="feature-image">
+
+                        <img
+                            src="Images/samplepic2.jpg"
+                            alt="Travel experience"
+                        >
+
+                    </div>
+
+                    <div class="feature-content">
+
+                        <h3>
+                            Amazing Experiences
+                        </h3>
+
+                        <p>
+                            Experience new cultures,
+                            adventures and incredible
+                            moments wherever you go.
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+                <article class="feature-card">
+
+                    <div class="feature-image">
+
+                        <img
+                            src="Images/logo.jpg"
+                            alt="Travel planning"
+                        >
+
+                    </div>
+
+                    <div class="feature-content">
+
+                        <h3>
+                            Easy Travel Planning
+                        </h3>
+
+                        <p>
+                            Plan your perfect trip with
+                            simple tools and useful travel
+                            information.
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- ======================================
+             DESTINATIONS
+        ======================================= -->
+
+        <section
+            class="destinations-section"
+            id="destinations"
+        >
+
+            <div class="section-heading">
+
+                <p>TOP DESTINATIONS</p>
+
+                <h2>
+                    Places You Must Visit
+                </h2>
+
+                <span>
+                    Start your journey and discover
+                    beautiful places around the world.
+                </span>
+
+            </div>
+
+
+            <div class="destination-grid">
+
+
+                <article class="destination-card">
+
+                    <img
+                        src="Images/samplepic1.jpg"
+                        alt="Beautiful destination"
+                    >
+
+                    <div class="destination-info">
+
+                        <span>
+                            🇮🇳 India
+                        </span>
+
+                        <h3>
+                            Kerala
+                        </h3>
+
+                        <p>
+                            Experience peaceful
+                            backwaters, beautiful beaches,
+                            mountains and rich culture.
+                        </p>
+
+                        <a href="#">
+                            Explore →
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+                <article class="destination-card">
+
+                    <img
+                        src="Images/samplepic2.jpg"
+                        alt="Mountain destination"
+                    >
+
+                    <div class="destination-info">
+
+                        <span>
+                            🇨🇭 Switzerland
+                        </span>
+
+                        <h3>
+                            Swiss Alps
+                        </h3>
+
+                        <p>
+                            Discover breathtaking mountains,
+                            peaceful villages and amazing
+                            natural landscapes.
+                        </p>
+
+                        <a href="#">
+                            Explore →
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+                <article class="destination-card">
+
+                    <img
+                        src="Images/samplepic1.jpg"
+                        alt="Beach destination"
+                    >
+
+                    <div class="destination-info">
+
+                        <span>
+                            🇲🇻 Maldives
+                        </span>
+
+                        <h3>
+                            Maldives
+                        </h3>
+
+                        <p>
+                            Relax on beautiful beaches and
+                            enjoy crystal-clear water and
+                            unforgettable sunsets.
+                        </p>
+
+                        <a href="#">
+                            Explore →
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- ======================================
+             TRAVEL EXPERIENCE
+        ======================================= -->
+
+        <section class="experience-section">
+
+            <div class="experience-image">
+
+                <img
+                    src="Images/samplepic2.jpg"
+                    alt="Travel experience"
+                >
+
+            </div>
+
+
+            <div class="experience-content">
+
+                <p>
+                    YOUR JOURNEY STARTS HERE
+                </p>
+
+                <h2>
+                    Make Every Journey
+                    <span>Memorable</span>
+                </h2>
+
+                <p>
+
+                    We believe travelling is more than
+                    visiting new places. It's about
+                    discovering yourself, meeting new
+                    people and creating memories that
+                    last forever.
+
+                </p>
+
+
+                <div class="experience-stats">
+
+                    <div>
+
+                        <strong>50+</strong>
+
+                        <span>
+                            Destinations
+                        </span>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>10K+</strong>
+
+                        <span>
+                            Happy Travelers
+                        </span>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>4.9</strong>
+
+                        <span>
+                            User Rating
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ======================================
+             CONTACT
+        ======================================= -->
+
+        <section
+            class="contact-section"
+            id="contact"
+        >
+
+            <div class="section-heading">
+
+                <p>GET IN TOUCH</p>
+
+                <h2>
+                    Start Your Journey
+                </h2>
+
+                <span>
+                    Have a question? We'd love to
+                    hear from you.
+                </span>
+
+            </div>
+
+
+            <form class="contact-form">
+
+                <div class="form-row">
+
+                    <input
+                        type="text"
+                        placeholder="Your Name"
+                        required
+                    >
+
+                    <input
+                        type="email"
+                        placeholder="Your Email"
+                        required
+                    >
+
+                </div>
+
+
+                <textarea
+                    rows="6"
+                    placeholder="Your Message"
+                    required
+                ></textarea>
+
+
+                <button
+                    type="submit"
+                    class="primary-btn"
+                >
+                    Send Message
+                </button>
+
+            </form>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- ==========================================
+         FOOTER
+    =========================================== -->
+
+    <footer class="footer">
+
+        <div>
+
+            <a href="#home" class="logo">
+                Travel<span>Go</span>
+            </a>
+
+            <p>
+                Explore the world.
+                Create memories.
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <p>
+                © 2026 TravelGo.
+                All rights reserved.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <!-- ==========================================
+         JAVASCRIPT
+    =========================================== -->
+
+    <script src="js/index.js"></script>
+
 </body>
 
 </html>
